@@ -15,7 +15,7 @@ const getUserFromAuthToken = (req, res, next) => {
   };
   try {
     const token = req.headers.authorization.split(" ")[1];
-    const { user } = jwt.verify(token, "mysecret");
+    const user = jwt.verify(token, process.env.JWT_SECRET || "secret");
     req.auth.isAuthenticated = true;
     req.auth.currentUser = user;
   } catch (error) {

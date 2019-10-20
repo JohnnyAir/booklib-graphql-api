@@ -1,5 +1,11 @@
 const { GraphQLObjectType } = require("graphql");
+const userMutations = require("./User");
 
-const RootQuery = new GraphQLObjectType({ name: "Mutation", fields: {} });
+const Mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    ...userMutations
+  }
+});
 
-module.exports = RootQuery;
+module.exports = Mutation;
