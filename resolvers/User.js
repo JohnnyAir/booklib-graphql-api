@@ -19,9 +19,17 @@ const createUser = async (_, args) => {
     password: password_hash
   });
   const newUser = await user.save();
-  newUser.token = jwt.sign(newUser, process.env.JWT_SECRET || "secret", {
-    expiresIn: "24h"
-  });
+  newUser.token = jwt.sign(
+    {
+      id: newUser._id,
+      email: newUser.email,
+      name: newUser.name
+    },
+    process.env.JWT_SECRET || "secret",
+    {
+      expiresIn: "24h"
+    }
+  );
   return newUser;
 };
 
