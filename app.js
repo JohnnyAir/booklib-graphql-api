@@ -3,6 +3,7 @@ const graphqlHTTP = require("express-graphql");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const { GraphQLSchema } = require("graphql");
+const { getUserFromAuthToken } = require("./middleware/auth");
 
 const query = require("./queries");
 const mutation = require("./mutation");
@@ -20,6 +21,7 @@ mongoose.connection.once("open", () => {
   console.log("connected to mongodb");
 });
 
+app.use("/graphql", getUserFromAuthToken);
 app.use(
   "/graphql",
   graphqlHTTP({
