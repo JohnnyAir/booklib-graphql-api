@@ -8,7 +8,7 @@ const validateAuth = resolver => (...args) => {
   return resolver.apply(null, args);
 };
 
-const getUserFromAuthToken = (req, res, next) => {
+const authMiddleware = (req, res, next) => {
   req.auth = {
     isAuthenticated: false,
     currentUser: null
@@ -26,5 +26,5 @@ const getUserFromAuthToken = (req, res, next) => {
 
 module.exports = {
   validateAuth,
-  getUserFromAuthToken
+  authMiddleware
 };
