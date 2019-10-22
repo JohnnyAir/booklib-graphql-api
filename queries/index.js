@@ -1,16 +1,22 @@
 const { GraphQLObjectType } = require("graphql");
-const UserType = require("../graphql-models/User");
-const { validateAuth } = require("../middleware/auth");
-const userResolver = require("../resolvers/User");
+const glob = require("glob");
+const cwd = "./queries";
+const pattern = "**/*.js";
 
-const RootQuery = new GraphQLObjectType({
-  name: "RootQueryType",
-  fields: {
-    me: {
-      type: UserType,
-      resolve: validateAuth(userResolver.getMyProfile)
-    }
-  }
+const query_modules = glob.sync(pattern, { cwd });
+
+const queries = {};
+
+query_modules.forEach(filepath => {
+  const module_queries = /index.js/.test(filepath)
+    ? {}
+    : require(`./${filepath}`);
+  Object.assign(queries, module_queries);
 });
 
-module.exports = RootQuery;
+module.exports = new GraphQLObjectType({
+  name: "RootQueryType",
+  fields: {
+    ...queries
+  }
+});
