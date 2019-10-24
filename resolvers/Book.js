@@ -1,15 +1,15 @@
 const Book = require("../models/Book");
 
-const getMyBooks = async (_, args, { auth }) => {
-  return await Book.find({ ...args, createdBy: auth.currentUser.id });
+const getBooks = async (_, args) => {
+  return await Book.find({ ...args });
 };
 
-const createBook = async (_, args, { auth }) => {
-  const { currentUser } = auth;
-  const book = new Book({
-    ...args,
-    createdBy: currentUser.id
-  });
+const getBook = async (_, { id }) => {
+  return await Book.findById(id);
+};
+
+const createBook = async (_, args) => {
+  const book = new Book({ ...args });
   return await book.save();
 };
 
@@ -17,6 +17,7 @@ const getAuthorBooks = async authorId => await Book.findById(authorId);
 
 module.exports = {
   getAuthorBooks,
-  getMyBooks,
+  getBooks,
+  getBook,
   createBook
 };

@@ -6,7 +6,6 @@ const Book = new Schema({
   authorId: { type: String, required: true },
   price: { type: Number, required: true },
   keywords: { type: Array },
-  createdBy: { type: String, required: true },
   timeCreated: { type: Date, required: true, default: Date.now() }
 });
 

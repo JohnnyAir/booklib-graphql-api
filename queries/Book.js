@@ -14,7 +14,7 @@ const book = {
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) }
   },
-  resolve: validateAuth(bookResolver.getABook)
+  resolve: validateAuth(bookResolver.getBook)
 };
 
 const books = {
@@ -23,7 +23,7 @@ const books = {
     genre: { type: GraphQLString },
     keywords: { type: new GraphQLList(GraphQLString) }
   },
-  resolve: validateAuth(bookResolver.getMyBooks)
+  resolve: validateAuth(bookResolver.getBooks)
 };
 
 module.exports = {
