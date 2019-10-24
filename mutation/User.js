@@ -1,4 +1,4 @@
-const UserType = require("../schema/User");
+const { UserType } = require("../schema/Schema");
 const { validateAuth } = require("../middleware/auth");
 const { GraphQLNonNull, GraphQLString } = require("graphql");
 const userResolver = require("../resolvers/User");

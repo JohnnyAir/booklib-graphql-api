@@ -13,7 +13,10 @@ const createBook = async (_, args, { auth }) => {
   return await book.save();
 };
 
+const getAuthorBooks = async authorId => await Book.findById(authorId);
+
 module.exports = {
+  getAuthorBooks,
   getMyBooks,
   createBook
 };

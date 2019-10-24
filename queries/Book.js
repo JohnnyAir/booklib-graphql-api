@@ -5,7 +5,7 @@ const {
   GraphQLList
 } = require("graphql");
 
-const BookType = require("../schema/Book");
+const { BookType } = require("../schema/Schema");
 const bookResolver = require("../resolvers/Book");
 const { validateAuth } = require("../middleware/auth");
 

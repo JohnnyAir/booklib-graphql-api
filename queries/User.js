@@ -1,4 +1,4 @@
-const UserType = require("../schema/User");
+const { UserType } = require("../schema/Schema");
 const userResolver = require("../resolvers/User");
 const { validateAuth } = require("../middleware/auth");
 
